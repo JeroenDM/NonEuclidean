@@ -7,6 +7,7 @@
 #include <GL/freeglut.h>
 
 #include "NonEuclidean/Vector.h"
+#include "NonEuclidean/Mesh.h"
 
 struct WindowDimensions
 {
@@ -24,7 +25,7 @@ struct WindowDimensions
 };
 
 /* global const as I dont' know how to capture this info in callbacks that are passed to glut. */
-WindowDimensions WINDOW_PROPERTIES{1920, 1080, 0, 0};
+inline WindowDimensions WINDOW_PROPERTIES{1920, 1080, 0, 0};
 
 int setupWindow(int *argc, char **argv)
 {
@@ -69,14 +70,12 @@ void updateVertexBuffer(float x_pos, float y_pos)
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices.data(), GL_STATIC_DRAW);
 }
 
-static void processMouseInput(int key, int state, int x, int y)
+void processMouseInput(int key, int state, int x, int y)
 {
     if (key == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
     {
         auto [xc, yc] = WINDOW_PROPERTIES.toClipSpace(x, y);
         std::cout << "Mouse pressed at " << xc << ", " << yc << "\n";
-        // updateVertexBuffer(MOUSE_X, MOUSE_Y);
-        // IS_MOUSE_PRESSED = trfloatue;
     }
 }
 
@@ -121,6 +120,8 @@ static void render()
 
 int main(int argc, char **argv)
 {
+
+    Mesh mesh("assets/Meshes/bunny.obj");
 
     int window = setupWindow(&argc, argv);
     std::cout << "Window create with id: " << window << "\n";

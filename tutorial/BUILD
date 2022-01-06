@@ -8,8 +8,9 @@ cc_binary(
     srcs = ["main.cc"],
     deps = [
         "//NonEuclidean:vector",
-        "//NonEuclidean:core",
+        "//NonEuclidean:rendering",
     ],
+    data = ["//assets:Meshes/bunny.obj"],
     linkopts = [
         # first tree are the result of `pkg-config --libs glew`
         "-lGLEW",

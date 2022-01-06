@@ -4,12 +4,18 @@
 #include <sstream>
 #include <string>
 #include <cassert>
+#include <iostream>
 
 Mesh::Mesh(const char* fname) {
   //Open the file for reading
-  std::ifstream fin(std::string("Meshes/") + fname);
+  std::string path(fname);
+  std::ifstream fin(path);
   if (!fin) {
+    std::cout << "File " << path << " not found.\n";
     return;
+  }
+  else {
+    std::cout << "Loading file " << path << "\n";
   }
 
   //Temporaries
