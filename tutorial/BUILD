@@ -3,5 +3,10 @@ cc_binary(
     srcs = ["main.cc"],
     deps = [
         "//NonEuclidean:vector",
-    ]
+        "@glew-2.2.0//:glew"
+    ],
+    linkopts = [
+        "-lGLEW",
+        "-lglut",
+    ],
 )

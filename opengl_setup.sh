@@ -1,0 +1,1 @@
+export OpenGL_GL_PREFERENCE=GLVND
