@@ -3,6 +3,8 @@ CC_FLAGS = [
     '-Wall',
 ]
 
+exports_files(["shaders/shader.vert", "shaders/shader.frag"])
+
 cc_binary(
     name = "main",
     srcs = ["main.cc"],
@@ -10,7 +12,8 @@ cc_binary(
         "//NonEuclidean:vector",
         "//NonEuclidean:rendering",
     ],
-    data = ["//assets:Meshes/bunny.obj"],
+    # "//assets:Meshes/bunny.obj",
+    data = ["shaders/shader.vert", "shaders/shader.frag"],
     linkopts = [
         # first tree are the result of `pkg-config --libs glew`
         "-lGLEW",

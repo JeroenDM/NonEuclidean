@@ -1,20 +1,25 @@
 #include <iostream>
 #include <array>
 #include <utility>
+#include <fstream>
 
 // Include glew before freeglut !!
 #include <GL/glew.h>
 #include <GL/freeglut.h>
 
 #include "NonEuclidean/Vector.h"
-#include "NonEuclidean/Mesh.h"
 
-struct WindowDimensions
+struct GlobalState
 {
+    // Window dimensions
     int width;
     int height;
     int x_position;
     int y_position;
+
+    // Shader file names
+    const std::string vs_file{"shaders/shader.vert"};
+    const std::string fs_file{"shaders/shader.frag"};
 
     std::pair<float, float> toClipSpace(int x, int y) const
     {
@@ -25,22 +30,19 @@ struct WindowDimensions
 };
 
 /* global const as I dont' know how to capture this info in callbacks that are passed to glut. */
-inline WindowDimensions WINDOW_PROPERTIES{1920, 1080, 0, 0};
+inline GlobalState GLOBALS{1920, 1080, 0, 0};
 
 int setupWindow(int *argc, char **argv)
 {
     glutInit(argc, argv);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA);
-    glutInitWindowSize(WINDOW_PROPERTIES.width, WINDOW_PROPERTIES.height);
-    glutInitWindowPosition(WINDOW_PROPERTIES.x_position, WINDOW_PROPERTIES.y_position);
+    glutInitWindowSize(GLOBALS.width, GLOBALS.height);
+    glutInitWindowPosition(GLOBALS.x_position, GLOBALS.y_position);
 
     return glutCreateWindow("Non euclidean test.");
 }
 
 GLuint VBO;
-bool IS_MOUSE_PRESSED{false};
-float MOUSE_X{0.0};
-float MOUSE_Y{0.0};
 
 static void createAndFillVertexBuffer()
 {
@@ -74,22 +76,65 @@ void processMouseInput(int key, int state, int x, int y)
 {
     if (key == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
     {
-        auto [xc, yc] = WINDOW_PROPERTIES.toClipSpace(x, y);
+        auto [xc, yc] = GLOBALS.toClipSpace(x, y);
         std::cout << "Mouse pressed at " << xc << ", " << yc << "\n";
     }
 }
 
 static void windowIsResized(int w, int h)
 {
-    WINDOW_PROPERTIES.width = w;
-    WINDOW_PROPERTIES.height = h;
+    GLOBALS.width = w;
+    GLOBALS.height = h;
     std::cout << "window resized to " << w << ", " << h << "\n";
 }
 
 static void updateMouseCoordinates(int x, int y)
 {
-    auto [xc, yc] = WINDOW_PROPERTIES.toClipSpace(x, y);
+    auto [xc, yc] = GLOBALS.toClipSpace(x, y);
     updateVertexBuffer(xc, yc);
+}
+
+bool readFile(const std::string filename, std::string &file_content)
+{
+    std::ifstream file(filename);
+
+    if (file.is_open())
+    {
+        std::string line;
+        while (std::getline(file, line))
+        {
+            file_content.append(line);
+            file_content.append("\n");
+        }
+        file.close();
+        return true;
+    }
+    std::cout << "Failed reading file " << filename << "\n";
+    return false;
+}
+
+static void compileShaders()
+{
+    GLuint shader_program_id = glCreateProgram();
+
+    if (shader_program_id == 0)
+    {
+        std::cout << "Error creating shader program.\n";
+        exit(1);
+    }
+
+    std::string vertex_shader_source, fragment_shader_source;
+    if (!readFile(GLOBALS.vs_file, vertex_shader_source))
+    {
+        exit(1);
+    }
+    if (!readFile(GLOBALS.fs_file, fragment_shader_source))
+    {
+        exit(1);
+    }
+
+    std::cout << vertex_shader_source << "\n";
+    std::cout << fragment_shader_source << "\n";
 }
 
 static void render()
@@ -121,8 +166,6 @@ static void render()
 int main(int argc, char **argv)
 {
 
-    Mesh mesh("assets/Meshes/bunny.obj");
-
     int window = setupWindow(&argc, argv);
     std::cout << "Window create with id: " << window << "\n";
 
@@ -140,6 +183,8 @@ int main(int argc, char **argv)
     // glCullFace(GL_FRONT);
 
     createAndFillVertexBuffer();
+
+    compileShaders();
 
     glutDisplayFunc(render);
     glutReshapeFunc(windowIsResized);
