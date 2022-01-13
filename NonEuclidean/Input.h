@@ -1,5 +1,8 @@
 #pragma once
 
+#include <GL/glew.h>
+#include <GLFW/glfw3.h>
+
 struct tagRAWINPUT;
 class Input {
 public:
@@ -7,6 +10,8 @@ public:
 
   void EndFrame();
   void UpdateRaw(const tagRAWINPUT* raw);
+
+  bool isKeyPressed(GLFWwindow* window, int key);
 
   //Keyboard
   bool key[256];

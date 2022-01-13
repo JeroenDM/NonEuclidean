@@ -91,21 +91,15 @@ int Engine::Run() {
     //   //Confine the cursor
     //   ConfineCursor();
 
-    //   if (input.key_press['1']) {
-    //     LoadScene(0);
-    //   } else if (input.key_press['2']) {
-    //     LoadScene(1);
-    //   } else if (input.key_press['3']) {
-    //     LoadScene(2);
-    //   } else if (input.key_press['4']) {
-    //     LoadScene(3);
-    //   } else if (input.key_press['5']) {
-    //     LoadScene(4);
-    //   } else if (input.key_press['6']) {
-    //     LoadScene(5);
-    //   } else if (input.key_press['7']) {
-    //     LoadScene(6);
-    //   }
+
+      if (input.isKeyPressed(hWindow, GLFW_KEY_1)) {
+        std::cout << "Loading level 1\n";
+        LoadScene(0);
+      }
+      else if (input.isKeyPressed(hWindow, GLFW_KEY_2)) {
+        std::cout << "Loading level 2\n";
+        LoadScene(1);
+      }
 
       //Used fixed time steps for updates
       double dt = glfwGetTime();
@@ -265,7 +259,7 @@ void Engine::Render(const Camera& cam, GLuint curFBO, const Portal* skipPortal) 
     GH_REC_LEVEL += 1;
   }
   
-#if 0
+#if 1
   //Debug draw colliders
   for (size_t i = 0; i < vObjects.size(); ++i) {
     vObjects[i]->DebugDraw(cam);

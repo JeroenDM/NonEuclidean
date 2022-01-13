@@ -2,6 +2,7 @@
 #include "GameHeader.h"
 // #include <Windows.h>
 #include <memory>
+#include <GLFW/glfw3.h>
 
 Input::Input() {
   // memset(this, 0, sizeof(Input));
@@ -14,6 +15,11 @@ void Input::EndFrame() {
   // mouse_dy = mouse_dy * GH_MOUSE_SMOOTH + mouse_ddy * (1.0f - GH_MOUSE_SMOOTH);
   // mouse_ddx = 0.0f;
   // mouse_ddy = 0.0f;
+}
+
+bool Input::isKeyPressed(GLFWwindow* window, int key){
+  int state = glfwGetKey(window, key);
+  return state == GLFW_PRESS;
 }
 
 void Input::UpdateRaw(const tagRAWINPUT* /* raw */) {
