@@ -4,14 +4,17 @@
 #include <sstream>
 #include <string>
 #include <cassert>
+#include <iostream>
 
 Mesh::Mesh(const char* fname) {
   //Open the file for reading
   std::ifstream fin(std::string("Meshes/") + fname);
   if (!fin) {
+    std::cout << "Failed to read mesh file " << fname << "\n";
     return;
   }
-
+  std::cout << "Reading mesh file " << fname << "\n";
+  
   //Temporaries
   std::vector<float> vert_palette;
   std::vector<float> uv_palette;

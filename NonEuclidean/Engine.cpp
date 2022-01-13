@@ -58,6 +58,7 @@ Engine::~Engine() {
   // ReleaseDC(hWnd, hDC);
   // wglDeleteContext(hRC);
   // DestroyWindow(hWnd);
+  glfwTerminate();
 }
 
 int Engine::Run() {
@@ -77,7 +78,7 @@ int Engine::Run() {
 
   //Game loop
   // MSG msg;
-  while (true) {
+  while (!glfwWindowShouldClose(hWindow)) {
     // if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE)) {
     //   //Handle windows messages
     //   if (msg.message == WM_QUIT) {
@@ -279,7 +280,13 @@ void Engine::CreateGLWindow() {
         exit(1);
     }
 
-    hWindow = glfwCreateWindow(640, 480, "Hello World", NULL, NULL);
+    hWindow = glfwCreateWindow(
+      GH_SCREEN_WIDTH,
+      GH_SCREEN_HEIGHT,
+      "Non Euclidean world",
+      NULL,
+      NULL
+    );
     if (!hWindow)
     {
         glfwTerminate();

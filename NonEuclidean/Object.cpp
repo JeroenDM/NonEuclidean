@@ -17,7 +17,7 @@ void Object::Reset() {
   p_scale = 1.0f;
 }
 
-void Object::Draw(const Camera& cam, uint32_t curFBO) {
+void Object::Draw(const Camera& cam, uint32_t /* curFBO */) {
   if (shader && mesh) {
     const Matrix4 mv = WorldToLocal().Transposed();
     const Matrix4 mvp = cam.Matrix() * LocalToWorld();

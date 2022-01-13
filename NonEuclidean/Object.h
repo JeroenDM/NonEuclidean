@@ -18,7 +18,7 @@ public:
   virtual ~Object() {}
 
   virtual void Reset();
-  virtual void Draw(const Camera& cam, uint32_t curFBO);
+  virtual void Draw(const Camera& cam, uint32_t /* curFBO */);
   virtual void Update() {};
   virtual void OnHit(Object& /* other */, Vector3& /* push */) {};
 

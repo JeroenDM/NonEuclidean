@@ -1,6 +1,7 @@
 #include "Texture.h"
 #include <fstream>
 #include <cassert>
+#include <iostream>
 
 Texture::Texture(const char* fname, int rows, int cols) {
   //Check if this is a 3D texture
@@ -11,6 +12,7 @@ Texture::Texture(const char* fname, int rows, int cols) {
   std::ifstream fin(std::string("Textures/") + fname, std::ios::in | std::ios::binary);
   if (!fin) {
     texId = 0;
+    std::cout << "Failed to read texture " << fname << "\n";
     return;
   }
 

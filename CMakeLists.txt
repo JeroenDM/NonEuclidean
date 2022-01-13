@@ -26,3 +26,11 @@ target_link_libraries(main
     glfw
     ${GLFW_LIBRARIES}
 )
+
+file(GLOB SHADER_FILES "NonEuclidean/Shaders/*")
+file(GLOB MESH_FILES "NonEuclidean/Meshes/*")
+file(GLOB TEXTURE_FILES "NonEuclidean/Textures/*")
+
+file(COPY ${SHADER_FILES} DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/Shaders)
+file(COPY ${MESH_FILES} DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/Meshes)
+file(COPY ${TEXTURE_FILES} DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/Textures)
