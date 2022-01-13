@@ -5,11 +5,10 @@
 #include "Object.h"
 #include "Portal.h"
 #include "Player.h"
-#include "Timer.h"
 #include "Scene.h"
 #include "Sky.h"
 #include <GL/glew.h>
-#include <windows.h>
+#include <GLFW/glfw3.h>
 #include <memory>
 #include <vector>
 
@@ -23,8 +22,6 @@ public:
   void Render(const Camera& cam, GLuint curFBO, const Portal* skipPortal);
   void LoadScene(int ix);
 
-  LRESULT WindowProc(HWND hCurWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
-
   const Player& GetPlayer() const { return *player; }
   float NearestPortalDist() const;
 
@@ -36,18 +33,19 @@ private:
   void ConfineCursor();
   void ToggleFullscreen();
 
-  HDC   hDC;           // device context
-  HGLRC hRC;				   // opengl context
-  HWND  hWnd;				   // window
-  HINSTANCE hInstance; // process id
+  // HDC   hDC;           // device context
+  // HGLRC hRC;				   // opengl context
+  // HWND  hWnd;				   // window
+  GLFWwindow* hWindow;
+  // HINSTANCE hInstance; // process id
 
-  LONG iWidth;         // window width
-  LONG iHeight;        // window height
+  unsigned long iWidth;         // window width
+  unsigned long iHeight;        // window height
   bool isFullscreen;   // fullscreen state
 
   Camera main_cam;
   Input input;
-  Timer timer;
+  // Timer timer;
 
   std::vector<std::shared_ptr<Object>> vObjects;
   std::vector<std::shared_ptr<Portal>> vPortals;
