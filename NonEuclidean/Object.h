@@ -20,7 +20,7 @@ public:
   virtual void Reset();
   virtual void Draw(const Camera& cam, uint32_t curFBO);
   virtual void Update() {};
-  virtual void OnHit(Object& other, Vector3& push) {};
+  virtual void OnHit(Object& /* other */, Vector3& /* push */) {};
 
   //Casts
   virtual Physical* AsPhysical() { return nullptr; }

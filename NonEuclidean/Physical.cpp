@@ -23,7 +23,7 @@ void Physical::Update() {
   pos += velocity * GH_DT;
 }
 
-void Physical::OnCollide(Object& other, const Vector3& push) {
+void Physical::OnCollide(Object& /* other */, const Vector3& push) {
   //Update position to avoid collision
   pos += push;
 

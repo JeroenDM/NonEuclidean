@@ -10,7 +10,7 @@ public:
 
   virtual void Reset() override;
   virtual void Update() override;
-  virtual void OnCollide(Object& other, const Vector3& push);
+  virtual void OnCollide(Object& /* other */, const Vector3& push);
 
   void SetPosition(const Vector3& _pos) {
     pos = _pos;

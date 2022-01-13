@@ -16,7 +16,7 @@ void Input::EndFrame() {
   // mouse_ddy = 0.0f;
 }
 
-void Input::UpdateRaw(const tagRAWINPUT* raw) {
+void Input::UpdateRaw(const tagRAWINPUT* /* raw */) {
   // static BYTE buffer[2048];
   // static UINT buffer_size = sizeof(buffer);
 
