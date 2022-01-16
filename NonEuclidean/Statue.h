@@ -3,7 +3,7 @@
 #include "Resources.h"
 
 class Statue : public Object {
-public:
+ public:
   Statue(const char* model) {
     mesh = AquireMesh(model);
     shader = AquireShader("texture");

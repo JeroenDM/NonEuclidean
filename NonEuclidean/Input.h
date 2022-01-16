@@ -5,7 +5,7 @@
 
 struct tagRAWINPUT;
 class Input {
-public:
+ public:
   Input();
 
   void EndFrame();
@@ -13,11 +13,11 @@ public:
 
   bool isKeyPressed(GLFWwindow* window, int key);
 
-  //Keyboard
+  // Keyboard
   bool key[256];
   bool key_press[256];
 
-  //Mouse
+  // Mouse
   bool mouse_button[3];
   bool mouse_button_press[3];
   float mouse_dx;
@@ -25,12 +25,12 @@ public:
   float mouse_ddx;
   float mouse_ddy;
 
-  //Joystick
-  //TODO:
+  // Joystick
+  // TODO:
 
-  //Bindings
-  //TODO:
+  // Bindings
+  // TODO:
 
-  //Calibration
-  //TODO:
+  // Calibration
+  // TODO:
 };

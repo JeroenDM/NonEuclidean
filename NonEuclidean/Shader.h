@@ -1,17 +1,18 @@
 #pragma once
 #include <GL/glew.h>
+
 #include <string>
 #include <vector>
 
 class Shader {
-public:
+ public:
   Shader(const char* name);
   ~Shader();
 
   void Use();
   void SetMVP(const float* mvp, const float* mv);
 
-private:
+ private:
   GLuint LoadShader(const char* fname, GLenum type);
 
   std::vector<std::string> attribs;

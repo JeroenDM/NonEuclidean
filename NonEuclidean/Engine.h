@@ -1,19 +1,21 @@
 #pragma once
-#include "GameHeader.h"
-#include "Camera.h"
-#include "Input.h"
-#include "Object.h"
-#include "Portal.h"
-#include "Player.h"
-#include "Scene.h"
-#include "Sky.h"
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
+
 #include <memory>
 #include <vector>
 
+#include "Camera.h"
+#include "GameHeader.h"
+#include "Input.h"
+#include "Object.h"
+#include "Player.h"
+#include "Portal.h"
+#include "Scene.h"
+#include "Sky.h"
+
 class Engine {
-public:
+ public:
   Engine();
   ~Engine();
 
@@ -25,7 +27,7 @@ public:
   const Player& GetPlayer() const { return *player; }
   float NearestPortalDist() const;
 
-private:
+ private:
   void CreateGLWindow();
   void InitGLObjects();
   void DestroyGLObjects();
@@ -39,9 +41,9 @@ private:
   GLFWwindow* hWindow;
   // HINSTANCE hInstance; // process id
 
-  unsigned long iWidth;         // window width
-  unsigned long iHeight;        // window height
-  bool isFullscreen;   // fullscreen state
+  unsigned long iWidth;   // window width
+  unsigned long iHeight;  // window height
+  bool isFullscreen;      // fullscreen state
 
   Camera main_cam;
   Input input;

@@ -1,18 +1,19 @@
 #pragma once
-#include "Camera.h"
 #include <GL/glew.h>
 
-//Forward declaration
+#include "Camera.h"
+
+// Forward declaration
 class Portal;
 
 class FrameBuffer {
-public:
+ public:
   FrameBuffer();
 
   void Render(const Camera& cam, GLuint curFBO, const Portal* skipPortal);
   void Use();
 
-private:
+ private:
   GLuint texId;
   GLuint fbo;
   GLuint renderBuf;

@@ -2,12 +2,12 @@
 #include <GL/glew.h>
 
 class Texture {
-public:
+ public:
   Texture(const char* fname, int rows, int cols);
 
   void Use();
 
-private:
+ private:
   GLuint texId;
   bool is3D;
 };

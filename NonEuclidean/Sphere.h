@@ -1,13 +1,14 @@
 #pragma once
-#include "Vector.h"
 #include <cassert>
 
+#include "Vector.h"
+
 class Sphere {
-public:
-  Sphere(float r=1.0f) : center(0.0f), radius(r) {}
+ public:
+  Sphere(float r = 1.0f) : center(0.0f), radius(r) {}
   Sphere(const Vector3& pos, float r) : center(pos), radius(r) {}
 
-  //Transformations to and frpom sphere coordinates
+  // Transformations to and frpom sphere coordinates
   Matrix4 UnitToLocal() const {
     assert(radius > 0.0f);
     return Matrix4::Trans(center) * Matrix4::Scale(radius);

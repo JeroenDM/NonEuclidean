@@ -1,7 +1,9 @@
 #include "Portal.h"
-#include "Engine.h"
+
 #include <cassert>
 #include <iostream>
+
+#include "Engine.h"
 
 Portal::Portal() : front(this), back(this) {
   mesh = AquireMesh("double_quad.obj");
@@ -13,13 +15,13 @@ void Portal::Draw(const Camera& cam, GLuint curFBO) {
   assert(euler.x == 0.0f);
   assert(euler.z == 0.0f);
 
-  //Draw pink to indicate end of render chain
+  // Draw pink to indicate end of render chain
   if (GH_REC_LEVEL <= 0) {
     DrawPink(cam);
     return;
   }
 
-  //Find normal relative to camera
+  // Find normal relative to camera
   Vector3 normal = Forward();
   const Vector3 camPos = cam.worldView.Inverse().Translation();
   const bool frontDirection = (camPos - pos).Dot(normal) > 0;
@@ -28,21 +30,21 @@ void Portal::Draw(const Camera& cam, GLuint curFBO) {
     normal = -normal;
   }
 
-  //Extra clipping to prevent artifacts
+  // Extra clipping to prevent artifacts
   const float extra_clip = GH_MIN(GH_ENGINE->NearestPortalDist() * 0.5f, 0.1f);
 
-  //Create new portal camera
+  // Create new portal camera
   Camera portalCam = cam;
-  portalCam.ClipOblique(pos - normal*extra_clip, -normal);
+  portalCam.ClipOblique(pos - normal * extra_clip, -normal);
   portalCam.worldView *= warp->delta;
   portalCam.width = GH_FBO_SIZE;
   portalCam.height = GH_FBO_SIZE;
 
-  //Render portal's view from new camera
+  // Render portal's view from new camera
   frameBuf[GH_REC_LEVEL - 1].Render(portalCam, curFBO, warp->toPortal);
   cam.UseViewport();
 
-  //Now we can render the portal texture to the screen
+  // Now we can render the portal texture to the screen
   const Matrix4 mv = LocalToWorld();
   const Matrix4 mvp = cam.Matrix() * mv;
   shader->Use();
@@ -64,7 +66,8 @@ Vector3 Portal::GetBump(const Vector3& a) const {
   return n * ((a - pos).Dot(n) > 0 ? 1.0f : -1.0f);
 }
 
-const Portal::Warp* Portal::Intersects(const Vector3& a, const Vector3& b, const Vector3& bump) const {
+const Portal::Warp* Portal::Intersects(const Vector3& a, const Vector3& b,
+                                       const Vector3& bump) const {
   const Vector3 n = Forward();
   const Vector3 p = pos + bump;
   const float da = n.Dot(a - p);
@@ -86,20 +89,20 @@ const Portal::Warp* Portal::Intersects(const Vector3& a, const Vector3& b, const
 }
 
 float Portal::DistTo(const Vector3& pt) const {
-  //Get world delta
+  // Get world delta
   const Matrix4 localToWorld = LocalToWorld();
   const Vector3 v = pt - localToWorld.Translation();
 
-  //Get axes
+  // Get axes
   const Vector3 x = localToWorld.XAxis();
   const Vector3 y = localToWorld.YAxis();
 
-  //Find closest point
+  // Find closest point
   const float px = GH_CLAMP(v.Dot(x) / x.MagSq(), -1.0f, 1.0f);
   const float py = GH_CLAMP(v.Dot(y) / y.MagSq(), -1.0f, 1.0f);
-  const Vector3 closest = x*px + y*py;
+  const Vector3 closest = x * px + y * py;
 
-  //Calculate distance to closest point
+  // Calculate distance to closest point
   return (v - closest).Mag();
 }
 

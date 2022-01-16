@@ -3,7 +3,7 @@
 #include "Vector.h"
 
 class Sky {
-public:
+ public:
   Sky() {
     mesh = AquireMesh("quad.obj");
     shader = AquireShader("sky");
@@ -19,7 +19,7 @@ public:
     glDepthMask(GL_TRUE);
   }
 
-private:
+ private:
   std::shared_ptr<Mesh> mesh;
   std::shared_ptr<Shader> shader;
 };

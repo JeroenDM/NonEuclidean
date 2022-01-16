@@ -1,4 +1,5 @@
 #include "Level6.h"
+
 #include "Floorplan.h"
 
 void Level6::Load(PObjectVec& objs, PPortalVec& portals, Player& player) {

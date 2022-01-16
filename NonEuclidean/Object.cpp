@@ -1,14 +1,10 @@
 #include "Object.h"
+
 #include "Mesh.h"
 #include "Shader.h"
 #include "Texture.h"
 
-Object::Object() :
-  pos(0.0f),
-  euler(0.0f),
-  scale(1.0f),
-  p_scale(1.0f) {
-}
+Object::Object() : pos(0.0f), euler(0.0f), scale(1.0f), p_scale(1.0f) {}
 
 void Object::Reset() {
   pos.SetZero();
@@ -31,15 +27,20 @@ void Object::Draw(const Camera& cam, uint32_t /* curFBO */) {
 }
 
 Vector3 Object::Forward() const {
-  return -(Matrix4::RotZ(euler.z) * Matrix4::RotX(euler.x) * Matrix4::RotY(euler.y)).ZAxis();
+  return -(Matrix4::RotZ(euler.z) * Matrix4::RotX(euler.x) *
+           Matrix4::RotY(euler.y))
+              .ZAxis();
 }
 
 Matrix4 Object::LocalToWorld() const {
-  return Matrix4::Trans(pos) * Matrix4::RotY(euler.y) * Matrix4::RotX(euler.x) * Matrix4::RotZ(euler.z) * Matrix4::Scale(scale * p_scale);
+  return Matrix4::Trans(pos) * Matrix4::RotY(euler.y) * Matrix4::RotX(euler.x) *
+         Matrix4::RotZ(euler.z) * Matrix4::Scale(scale * p_scale);
 }
 
 Matrix4 Object::WorldToLocal() const {
-  return Matrix4::Scale(1.0f / (scale * p_scale)) * Matrix4::RotZ(-euler.z) * Matrix4::RotX(-euler.x) * Matrix4::RotY(-euler.y) * Matrix4::Trans(-pos);
+  return Matrix4::Scale(1.0f / (scale * p_scale)) * Matrix4::RotZ(-euler.z) *
+         Matrix4::RotX(-euler.x) * Matrix4::RotY(-euler.y) *
+         Matrix4::Trans(-pos);
 }
 
 void Object::DebugDraw(const Camera& cam) {

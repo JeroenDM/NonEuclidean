@@ -2,11 +2,12 @@
 #include "Scene.h"
 
 class Level2 : public Scene {
-public:
+ public:
   Level2(int rooms) : num_rooms(rooms) {}
 
-  virtual void Load(PObjectVec& objs, PPortalVec& portals, Player& player) override;
+  virtual void Load(PObjectVec& objs, PPortalVec& portals,
+                    Player& player) override;
 
-private:
+ private:
   int num_rooms;
 };

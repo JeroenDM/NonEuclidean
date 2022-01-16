@@ -2,14 +2,10 @@
 #include <Windows.h>
 
 class Timer {
-public:
-  Timer() {
-    QueryPerformanceFrequency(&frequency);
-  }
+ public:
+  Timer() { QueryPerformanceFrequency(&frequency); }
 
-  void Start() {
-    QueryPerformanceCounter(&t1);
-  }
+  void Start() { QueryPerformanceCounter(&t1); }
 
   float Stop() {
     QueryPerformanceCounter(&t2);
@@ -31,7 +27,7 @@ public:
     return result;
   }
 
-private:
-  LARGE_INTEGER frequency;        // ticks per second
-  LARGE_INTEGER t1, t2;           // ticks
+ private:
+  LARGE_INTEGER frequency;  // ticks per second
+  LARGE_INTEGER t1, t2;     // ticks
 };
