@@ -91,6 +91,10 @@ int Engine::Run() {
     //   //Confine the cursor
     //   ConfineCursor();
 
+      if (input.isKeyPressed(hWindow, GLFW_KEY_ESCAPE)) {
+        glfwSetWindowShouldClose(hWindow, GL_TRUE);
+      }
+
 
       if (input.isKeyPressed(hWindow, GLFW_KEY_1)) {
         std::cout << "Loading level 1\n";
