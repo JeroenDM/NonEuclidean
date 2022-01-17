@@ -309,6 +309,11 @@ void Engine::InitGLObjects() {
   if (err != GLEW_OK) {
     std::cout << "Failed to initialize glew.\n";
   }
+  {
+    std::cout << "Successfuly initialized opengl.\n";
+  }
+
+  std::cout << "OpenGL version supported by this platform (" <<  glGetString(GL_VERSION) << "): \n";
 
   // Basic global variables
   glClearColor(0.6f, 0.9f, 1.0f, 1.0f);
@@ -318,9 +323,9 @@ void Engine::InitGLObjects() {
   glDepthFunc(GL_LESS);
   glDepthMask(GL_TRUE);
 
-  // //Check GL functionality
-  // glGetQueryiv(GL_SAMPLES_PASSED_ARB, GL_QUERY_COUNTER_BITS_ARB,
-  // &occlusionCullingSupported);
+  //Check GL functionality
+  glGetQueryiv(GL_SAMPLES_PASSED_ARB, GL_QUERY_COUNTER_BITS_ARB,
+  &occlusionCullingSupported);
 
   // //Attempt to enalbe vsync (if failure then oh well)
   // wglSwapIntervalEXT(1);
