@@ -12,7 +12,7 @@ static const int GH_MAX_PORTALS = 16;
 //Graphics
 static const bool GH_START_FULLSCREEN = false;
 static const bool GH_HIDE_MOUSE = true;
-static const bool GH_USE_SKY = false;
+static const bool GH_USE_SKY = true;
 static const int GH_SCREEN_WIDTH = 1280;
 static const int GH_SCREEN_HEIGHT = 720;
 static const int GH_SCREEN_X = 50;

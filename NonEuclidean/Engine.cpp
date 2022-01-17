@@ -130,7 +130,7 @@ int Engine::Run()
     //Render scene
     GH_REC_LEVEL = GH_MAX_RECURSION;
     Render(main_cam, 0, nullptr);
-    glfwPollEvents();
+    // glfwPollEvents();
     glfwSwapBuffers(hWindow);
     glfwPollEvents();
     // }
