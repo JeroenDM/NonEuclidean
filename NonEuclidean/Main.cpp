@@ -1,36 +1,29 @@
-#include <iostream>
 #include <cstdlib>
+#include <iostream>
 
 // #include "Engine.h"
-#include "GameHeader.h"
-#include "Vector.h"
-#include "Camera.h"
-#include "Mesh.h"
-#include "Shader.h"
-#include "Resources.h"
-
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
+
+#include "Camera.h"
+#include "GameHeader.h"
+#include "Mesh.h"
+#include "Resources.h"
+#include "Shader.h"
+#include "Vector.h"
 
 inline GLFWwindow *hWindow;
 inline GLint occlusionCullingSupported;
 
-void CreateGLWindow()
-{
+void CreateGLWindow() {
   /* Initialize the library */
-  if (!glfwInit())
-  {
+  if (!glfwInit()) {
     std::exit(EXIT_FAILURE);
   }
 
-  hWindow = glfwCreateWindow(
-      GH_SCREEN_WIDTH,
-      GH_SCREEN_HEIGHT,
-      "Non Euclidean world",
-      NULL,
-      NULL);
-  if (!hWindow)
-  {
+  hWindow = glfwCreateWindow(GH_SCREEN_WIDTH, GH_SCREEN_HEIGHT,
+                             "Non Euclidean world", NULL, NULL);
+  if (!hWindow) {
     glfwTerminate();
     std::cout << "Failed to create window.\n";
     std::exit(EXIT_FAILURE);
@@ -39,17 +32,15 @@ void CreateGLWindow()
   glfwMakeContextCurrent(hWindow);
 }
 
-void InitGLObjects()
-{
-  //Initialize extensions
+void InitGLObjects() {
+  // Initialize extensions
   GLenum err = glewInit();
 
-  if (err != GLEW_OK)
-  {
+  if (err != GLEW_OK) {
     std::cout << "Failed to initialize glew.\n";
   }
 
-  //Basic global variables
+  // Basic global variables
   glClearColor(0.6f, 0.9f, 1.0f, 1.0f);
   // glEnable(GL_CULL_FACE);
   // glCullFace(GL_BACK);
@@ -58,16 +49,17 @@ void InitGLObjects()
   // glDepthMask(GL_TRUE);
 
   // //Check GL functionality
-  glGetQueryiv(GL_SAMPLES_PASSED_ARB, GL_QUERY_COUNTER_BITS_ARB, &occlusionCullingSupported);
-  std::cout << "Occlusion culling supported: " << occlusionCullingSupported << "\n";
+  glGetQueryiv(GL_SAMPLES_PASSED_ARB, GL_QUERY_COUNTER_BITS_ARB,
+               &occlusionCullingSupported);
+  std::cout << "Occlusion culling supported: " << occlusionCullingSupported
+            << "\n";
 
   // //Attempt to enalbe vsync (if failure then oh well)
   // glSwapIntervalEXT(1);
 }
 
-int main()
-{
-  //Run the main engine
+int main() {
+  // Run the main engine
   // Engine engine;
   // return engine.Run();
 
@@ -83,8 +75,7 @@ int main()
   // shader->Use();
   // texture->Use();
 
-  while (!glfwWindowShouldClose(hWindow))
-  {
+  while (!glfwWindowShouldClose(hWindow)) {
     mesh->Draw();
     glfwSwapBuffers(hWindow);
     glfwPollEvents();

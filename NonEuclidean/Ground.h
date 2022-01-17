@@ -3,8 +3,8 @@
 #include "Resources.h"
 
 class Ground : public Object {
-public:
-  Ground(bool slope=false) {
+ public:
+  Ground(bool slope = false) {
     if (slope) {
       mesh = AquireMesh("ground_slope.obj");
     } else {

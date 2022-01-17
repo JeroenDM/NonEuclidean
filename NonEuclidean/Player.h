@@ -1,9 +1,9 @@
 #pragma once
-#include "Vector.h"
 #include "Physical.h"
+#include "Vector.h"
 
 class Player : public Physical {
-public:
+ public:
   Player();
   virtual ~Player() override {}
 
@@ -18,7 +18,7 @@ public:
   Matrix4 CamToWorld() const;
   Vector3 CamOffset() const;
 
-private:
+ private:
   float cam_rx;
   float cam_ry;
 

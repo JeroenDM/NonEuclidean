@@ -4,7 +4,7 @@
 #include "Sphere.h"
 
 class Physical : public Object {
-public:
+ public:
   Physical();
   virtual ~Physical() override {}
 
@@ -27,7 +27,7 @@ public:
   float friction;
   float high_friction;
   float drag;
-  
+
   Vector3 prev_pos;
 
   std::vector<Sphere> hitSpheres;

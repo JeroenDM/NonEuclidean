@@ -3,7 +3,7 @@
 #include "Resources.h"
 
 class PillarRoom : public Object {
-public:
+ public:
   PillarRoom() {
     mesh = AquireMesh("pillar_room.obj");
     shader = AquireShader("texture");

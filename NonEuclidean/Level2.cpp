@@ -1,4 +1,5 @@
 #include "Level2.h"
+
 #include "House.h"
 
 void Level2::Load(PObjectVec& objs, PPortalVec& portals, Player& player) {

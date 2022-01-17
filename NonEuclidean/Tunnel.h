@@ -2,7 +2,7 @@
 #include "Object.h"
 
 class Tunnel : public Object {
-public:
+ public:
   enum Type {
     NORMAL = 0,
     SCALE = 1,
@@ -41,6 +41,6 @@ public:
     }
   }
 
-private:
+ private:
   Type type;
 };

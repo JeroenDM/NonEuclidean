@@ -2,7 +2,7 @@
 #include "Vector.h"
 
 class Camera {
-public:
+ public:
   Camera();
 
   Matrix4 InverseProjection() const;

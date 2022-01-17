@@ -1,15 +1,16 @@
 #pragma once
-#include "GameHeader.h"
-#include "Object.h"
-#include "FrameBuffer.h"
-#include "Mesh.h"
-#include "Resources.h"
-#include "Shader.h"
 #include <memory>
 
+#include "FrameBuffer.h"
+#include "GameHeader.h"
+#include "Mesh.h"
+#include "Object.h"
+#include "Resources.h"
+#include "Shader.h"
+
 class Portal : public Object {
-public:
-  //Subclass that represents a warp
+ public:
+  // Subclass that represents a warp
   struct Warp {
     Warp(const Portal* fromPortal) : fromPortal(fromPortal), toPortal(nullptr) {
       delta.MakeIdentity();
@@ -29,7 +30,8 @@ public:
   void DrawPink(const Camera& cam);
 
   Vector3 GetBump(const Vector3& a) const;
-  const Warp* Intersects(const Vector3& a, const Vector3& b, const Vector3& bump) const;
+  const Warp* Intersects(const Vector3& a, const Vector3& b,
+                         const Vector3& bump) const;
   float DistTo(const Vector3& pt) const;
 
   static void Connect(std::shared_ptr<Portal>& a, std::shared_ptr<Portal>& b);
@@ -38,7 +40,7 @@ public:
   Warp front;
   Warp back;
 
-private:
+ private:
   std::shared_ptr<Shader> errShader;
   FrameBuffer frameBuf[GH_MAX_RECURSION <= 1 ? 1 : GH_MAX_RECURSION - 1];
 };
